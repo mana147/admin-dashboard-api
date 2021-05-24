@@ -7,10 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Dashboard - SB Admin</title>
-    <link href="/css/styles.css" rel="stylesheet"/>
-    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+    <title>Dashboard - API Document </title>
+    <link href="/css/styles.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" async ></script>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" async ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" async ></script>
+    <script src="/js/scripts.js" async ></script>
 </head>
 
 <body class="sb-nav-fixed">
@@ -62,6 +65,16 @@
                 <a class="nav-link" href="#"> list report theo campaign </a>
                 <a class="nav-link" href="#"> Report theo chi tiết 1 campaign </a>
 
+                <div class="sb-sidenav-menu-heading">API Theo campaign :</div>
+                <a class="nav-link" href="#"> List campaign info </a>
+                <a class="nav-link" href="#"> list report theo campaign </a>
+                <a class="nav-link" href="#"> Report theo chi tiết 1 campaign </a>
+                
+                <div class="sb-sidenav-menu-heading">API Theo campaign :</div>
+                <a class="nav-link" href="#"> List campaign info </a>
+                <a class="nav-link" href="#"> list report theo campaign </a>
+                <a class="nav-link" href="#"> Report theo chi tiết 1 campaign </a>
+
             </div>
         </div>
 
@@ -78,28 +91,143 @@
         <div id="layoutSidenav_content">
 
             
+
 <main>
     <div class="container-fluid">
 
         <div class="row">
 
-            <div class="col-sm-8">
-                <p class="alert alert-info mt-4">
-                    <strong> Serving file : </strong> Lấy file đã upload lên storage trước đó
-                </p>
+            <div class="col-sm-7 mt-4">
 
-                <div class="card">
-                    <div class="card-body">  </div>
+                <div class="card card-header-actions">
 
-                
+                    <div class="card-header alert alert-success">
+                        <strong> API Upload file : </strong>
+                    </div>
+
+                    <div class="card-body">
+
+                        <p>
+                            <strong> Upload file lên hệ thống MPS </strong> <br>
+                            - Nếu upload từ server dự án, có thể upload sử dụng secret key.<br>
+                            - Nếu upload từ client, có thể sử dụng policy signature.<br>
+                            - Hiện hệ thống giới hạn dung lượng file tối đa là 8GB.<br>
+                        </p>
+
+                        <p> <strong> Endpoint </strong> : GET < API_ENDPOINT>/_/ls </p>
+
+                        <div class="table-responsive mt-3">
+
+                            <table class="table table-striped table-sm">
+
+                                <thead>
+                                    <tr>
+                                        <th>Tham_số</th>
+                                        <th>Bắt_buộc</th>
+                                        <th>Loại</th>
+                                        <th>Nguồn</th>
+                                        <th>Mô_tả</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    <tr>
+                                        <td> secret_key</td>
+                                        <td> Có </td>
+                                        <td> String</td>
+                                        <td> Query string</td>
+                                        <td> Secret key của phân vùng lưu trữ</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>dirpath</td>
+                                        <td>Có</td>
+                                        <td>String</td>
+                                        <td>Query string</td>
+                                        <td>Thư mục của namespace muốn liệt kê file</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>page</td>
+                                        <td>Không</td>
+                                        <td>Int</td>
+                                        <td>Query string</td>
+                                        <td>Kết quả trả về được phân trang </td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                        <p> <strong> Kết quả trả về </strong> </p>
+
+                        <pre>
+                            <code>
+{
+    'directories': mảng danh sách thư mục con cấp 1 của thư mục muốn liệt kê,
+    'files': mảng danh sách file nằm trong thư mục muốn liệt kê,
+    'page': 'trang/tổng số trang kết quả
+}
+                            </code> 
+                        </pre>
+
+                        <div class="table-responsive mt-3">
+
+                            <table class="table table-striped table-sm">
+
+                                <thead>
+                                    <tr>
+                                        <th>Mã lỗi</th>
+                                        <th>Mô tả</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    <tr>
+                                        <td> secret_key</td>
+                                        <td> Có </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>dirpath</td>
+                                        <td>Có</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>page</td>
+                                        <td>Không</td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+
+                    </div>
                 </div>
 
             </div>
 
-            <div class="col-sm-4">
-                <p class="alert alert-dark mt-4"> 
-                    <strong> Demo API : </strong> 
-                </p>
+            <div class="col-sm-5 mt-4">
+                <div class="card card-header-actions">
+                    <div class="card card-header alert alert-dark">
+                        <strong> Demo API : </strong>
+                    </div>
+
+                    <div class="card-body">
+                        <p>ấdasdasdasd</p>
+                    </div>
+
+                </div>
+
+
+
 
             </div>
 
@@ -114,23 +242,159 @@
 
             
 
-<footer class="py-4 bg-light mt-auto">
+<main>
     <div class="container-fluid">
-        <div class="d-flex align-items-center justify-content-between small">
-            <div class="text-muted"> </div>
-            <div> Copyright &copy; Adtech </div>
+
+        <div class="row">
+
+            <div class="col-sm-7 mt-4">
+
+                <div class="card card-header-actions">
+
+                    <div class="card-header alert alert-success">
+                        <strong> API Upload file : </strong>
+                    </div>
+
+                    <div class="card-body">
+
+                        <p>
+                            <strong> Upload file lên hệ thống MPS </strong> <br>
+                            - Nếu upload từ server dự án, có thể upload sử dụng secret key.<br>
+                            - Nếu upload từ client, có thể sử dụng policy signature.<br>
+                            - Hiện hệ thống giới hạn dung lượng file tối đa là 8GB.<br>
+                        </p>
+
+                        <p> <strong> Endpoint </strong> : GET < API_ENDPOINT>/_/ls </p>
+
+                        <div class="table-responsive mt-3">
+
+                            <table class="table table-striped table-sm">
+
+                                <thead>
+                                    <tr>
+                                        <th>Tham_số</th>
+                                        <th>Bắt_buộc</th>
+                                        <th>Loại</th>
+                                        <th>Nguồn</th>
+                                        <th>Mô_tả</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    <tr>
+                                        <td> secret_key</td>
+                                        <td> Có </td>
+                                        <td> String</td>
+                                        <td> Query string</td>
+                                        <td> Secret key của phân vùng lưu trữ</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>dirpath</td>
+                                        <td>Có</td>
+                                        <td>String</td>
+                                        <td>Query string</td>
+                                        <td>Thư mục của namespace muốn liệt kê file</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>page</td>
+                                        <td>Không</td>
+                                        <td>Int</td>
+                                        <td>Query string</td>
+                                        <td>Kết quả trả về được phân trang </td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                        <p> <strong> Kết quả trả về </strong> </p>
+
+                        <pre>
+                            <code>
+{
+    'directories': mảng danh sách thư mục con cấp 1 của thư mục muốn liệt kê,
+    'files': mảng danh sách file nằm trong thư mục muốn liệt kê,
+    'page': 'trang/tổng số trang kết quả
+}
+                            </code> 
+                        </pre>
+
+                        <div class="table-responsive mt-3">
+
+                            <table class="table table-striped table-sm">
+
+                                <thead>
+                                    <tr>
+                                        <th>Mã lỗi</th>
+                                        <th>Mô tả</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    <tr>
+                                        <td> secret_key</td>
+                                        <td> Có </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>dirpath</td>
+                                        <td>Có</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>page</td>
+                                        <td>Không</td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-sm-5 mt-4">
+                <div class="card card-header-actions">
+                    <div class="card card-header alert alert-dark">
+                        <strong> Demo API : </strong>
+                    </div>
+
+                    <div class="card-body">
+                        <p>ấdasdasdasd</p>
+                    </div>
+
+                </div>
+
+
+
+
+            </div>
+
+
         </div>
     </div>
-</footer>
 
 
+</main>
+
+
+
+            <!-- build:footer -->
 
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="/js/scripts.js"></script>
 </body>
 
 </html>
